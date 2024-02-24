@@ -10,7 +10,7 @@ import java.io.Serializable;
 @Entity
 @Getter @Setter @ToString
 @Table(name = "client")
-public class Client implements Serializable {
+public class Client implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,8 +29,7 @@ public class Client implements Serializable {
         this.dni = dni;
     }
 
-    public Client() {
-    }
+    public Client(){}
 
 
 }

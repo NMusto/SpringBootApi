@@ -14,10 +14,9 @@ public class ClientService implements BaseService<Client> {
     @Autowired
     private ClientRepository clientRepository;
 
-    public ClientService (ClientRepository clientRepository) {
+    public ClientService(ClientRepository clientRepository) {
         this.clientRepository = clientRepository;
     }
-
 
     @Override
     public List<Client> findAll() throws Exception {
@@ -57,7 +56,12 @@ public class ClientService implements BaseService<Client> {
         try {
             Optional<Client> clientOptional = clientRepository.findById(id);
             Client client = clientOptional.get();
-            client = clientRepository.save(client);
+
+            client.setName(entity.getName());
+            client.setLastname(entity.getLastname());
+            client.setDni(entity.getDni());
+
+            clientRepository.save(client);
             return client;
         }
         catch (Exception e) {
@@ -66,14 +70,14 @@ public class ClientService implements BaseService<Client> {
     }
 
     @Override
-    public boolean delete(Long id) throws Exception {
+    public boolean delete(Long id) throws Exception{
         try {
-            if (clientRepository.existsById(id)) {
-                clientRepository.deleteById(id);
-                return true;
-            } else throw new Exception();
-
-        } catch (Exception e) {
+            Optional<Client> clientOptional = clientRepository.findById(id);
+            Client client = clientOptional.get();
+            clientRepository.delete(client);
+            return true;
+        }
+        catch (Exception e) {
             throw new Exception(e.getMessage());
         }
     }
