@@ -35,7 +35,7 @@ public class ClientController {
             return ResponseEntity.status(HttpStatus.OK).body(clientService.findById(id));
         }
         catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"Error\":\"Clients not found, please try later!\"}");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"Error\":\"Client not found, please try later!\"}");
         }
     }
 
